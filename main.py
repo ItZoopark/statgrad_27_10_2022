@@ -80,4 +80,151 @@ def task_12():
 
 # task_12()
 
+def task_14():
+
+    def to_16(x):
+        alphabet = {10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'}
+        res = ''
+        while x != 0:
+            if x % 16 > 9:
+                res = alphabet[x % 16] + res
+            else:
+                res = str(x % 16) + res
+            x //= 16
+        return res
+
+    return to_16(4**36 + 3*4**20 + 4**15 + 2*4**7 + 49)
+
+# print(len(set(task_14())))
+
+def task_15():
+    def f(x, A):
+        return (x & 85 == 0) <= ((x & 54 != 0) <= (x & A != 0))
+
+    A = 0
+    while True:
+        for x in range(1001):
+            if not f(x, A):
+                break
+        else:
+            return A
+        A += 1
+
+# print(task_15())
+
+def task_16():
+    def f(n):
+        if n == 0:
+            return 0
+        elif n > 0 and n % 2 == 0:
+            return f(n//2)
+        elif n % 2 != 0:
+            return 1 + f(n-1)
+
+    count = 0
+    for i in range(1, 501):
+        if f(i) == 8:
+            print(i, bin(i)[2:])
+            count += 1
+    print(count)
+
+# print(task_16())
+# print(bin(500)[2:])
+def task_22():
+    x = 4
+    while True:
+        x += 1
+        a = 7*x + 27
+        b = 7*x - 33
+        while a != b:
+            if a > b:
+                a -= b
+            else:
+                b -= a
+
+        if a == 15:
+            print(x)
+            break
+
+# task_22()
+def task_23():
+    def f(x, y):
+        if x == y:
+            return 1
+        elif x > y:
+            return 0
+        else:
+            return f(x + 1, y) + f(x * 3, y)
+
+    print(f(2, 28) * f(28, 90))
+
+# task_23()
+def task_24():
+    # data = 'jfhdgjAfghkAj'
+    data = open('24.txt').read()
+    mas = data.split('A')
+    max_count = 0
+    for i in range(len(mas)-1):
+        max_count = max(len(mas[i]) + len(mas[i+1]) + 1, max_count)
+    print(max_count)
+    # s = 'FGHGHH'
+    # print(s.split('A'))
+    # print(len(max(data.split('A'), key=len)) + 1)
+    # cur_count = 0
+    # cur_all = 0
+    # countA = 0
+    # for c in data:
+    #     if countA > 1:
+    #         cur_all = max(cur_all, cur_count + 1)
+    #         cur_count = 0
+    #     if c == 'A':
+    #         countA += 1
+    #     else:
+    #         cur_count += 1
+    # cur_all = max(cur_all, cur_count + 1)
+    # print(cur_all)
+
+
+
+task_24()
+# a = ['Z', 'AB']
+# print(len(max(a, key=len)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
