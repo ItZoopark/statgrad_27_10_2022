@@ -170,7 +170,7 @@ def task_24():
     mas = data.split('A')
     max_count = 0
     for i in range(len(mas) - 1):
-        max_count = max(len(mas[i]) + len(mas[i+1]) + 1, max_count)
+        max_count = max(len(mas[i]) + len(mas[i + 1]) + 1, max_count)
         # t = mas[i] + 'A' + mas[i + 1]
         # max_count = max(len(t), max_count)
     print(max_count)
@@ -195,48 +195,43 @@ def task_24():
 # task_24()
 # a = ['Z', 'AB']
 # print(len(max(a, key=len)))
+def razbor_19_20_21():
+    size = 93
+    win = 107
+    a = [[0] * size * 2 for i in range(size * 2)]
 
-size = 93
-win = 107
-a = [[0]*size*2 for i in range(size*2)]
-
-for s1 in range(size):
-    for s2 in range(size):
-        if 2*s1 + s2 >= win or s1 + 2*s2 >= win:
-            a[s1][s2] = 1
-
-for k in range(2*size):
     for s1 in range(size):
         for s2 in range(size):
-            if a[s1][s2] == 0:
-                if a[s1 * 2][s2] > 0 and a[s1][s2 * 2] > 0 and a[s1 + 1][s2] > 0 and a[s1][s2 + 1] > 0:
-                    a[s1][s2] = -max(a[s1 * 2][s2], a[s1][s2 * 2], a[s1 + 1][s2], a[s1][s2 + 1])
-                elif a[s1 * 2][s2] < 0 or a[s1][s2 * 2] < 0 or a[s1 + 1][s2] < 0 or a[s1][s2 + 1] < 0:
-                    neg = list(filter(lambda x: x < 0, [a[s1 * 2][s2], a[s1][s2 * 2], a[s1 + 1][s2], a[s1][s2 + 1]]))
-                    a[s1][s2] = abs(min(neg)) + 1
+            if 2 * s1 + s2 >= win or s1 + 2 * s2 >= win:
+                a[s1][s2] = 1
 
-for s in range(1, 94):
-    if a[13][s] == 2:
-        print(s)
+    for k in range(2 * size):
+        for s1 in range(size):
+            for s2 in range(size):
+                if a[s1][s2] == 0:
+                    if a[s1 * 2][s2] > 0 and a[s1][s2 * 2] > 0 and a[s1 + 1][s2] > 0 and a[s1][s2 + 1] > 0:
+                        a[s1][s2] = -max(a[s1 * 2][s2], a[s1][s2 * 2], a[s1 + 1][s2], a[s1][s2 + 1])
+                    elif a[s1 * 2][s2] < 0 or a[s1][s2 * 2] < 0 or a[s1 + 1][s2] < 0 or a[s1][s2 + 1] < 0:
+                        neg = list(
+                            filter(lambda x: x < 0, [a[s1 * 2][s2], a[s1][s2 * 2], a[s1 + 1][s2], a[s1][s2 + 1]]))
+                        a[s1][s2] = abs(min(neg)) + 1
 
-
-
-
-
-
-
-
-
+    for s in range(1, 94):
+        if a[13][s] == 2:
+            print(s)
 
 
+def razbor_23():
+    a = set()
 
+    def f(x, p, m):
+        if p == m:
+            a.add(x)
+            return
+        f(x + 2, p + 1, m)
+        f(x * 3, p + 1, m)
 
+    f(2, 0, 10)
+    print(len(a))
 
-
-
-
-
-
-
-
-
+razbor_23()
