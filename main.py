@@ -78,10 +78,10 @@ def task_12():
             break
     print(len(s))
 
+
 # task_12()
 
 def task_14():
-
     def to_16(x):
         alphabet = {10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'}
         res = ''
@@ -93,7 +93,8 @@ def task_14():
             x //= 16
         return res
 
-    return to_16(4**36 + 3*4**20 + 4**15 + 2*4**7 + 49)
+    return to_16(4 ** 36 + 3 * 4 ** 20 + 4 ** 15 + 2 * 4 ** 7 + 49)
+
 
 # print(len(set(task_14())))
 
@@ -110,6 +111,7 @@ def task_15():
             return A
         A += 1
 
+
 # print(task_15())
 
 def task_16():
@@ -117,9 +119,9 @@ def task_16():
         if n == 0:
             return 0
         elif n > 0 and n % 2 == 0:
-            return f(n//2)
+            return f(n // 2)
         elif n % 2 != 0:
-            return 1 + f(n-1)
+            return 1 + f(n - 1)
 
     count = 0
     for i in range(1, 501):
@@ -128,14 +130,15 @@ def task_16():
             count += 1
     print(count)
 
+
 # print(task_16())
 # print(bin(500)[2:])
 def task_22():
     x = 4
     while True:
         x += 1
-        a = 7*x + 27
-        b = 7*x - 33
+        a = 7 * x + 27
+        b = 7 * x - 33
         while a != b:
             if a > b:
                 a -= b
@@ -145,6 +148,7 @@ def task_22():
         if a == 15:
             print(x)
             break
+
 
 # task_22()
 def task_23():
@@ -158,14 +162,17 @@ def task_23():
 
     print(f(2, 28) * f(28, 90))
 
+
 # task_23()
 def task_24():
     # data = 'jfhdgjAfghkAj'
     data = open('24.txt').read()
     mas = data.split('A')
     max_count = 0
-    for i in range(len(mas)-1):
+    for i in range(len(mas) - 1):
         max_count = max(len(mas[i]) + len(mas[i+1]) + 1, max_count)
+        # t = mas[i] + 'A' + mas[i + 1]
+        # max_count = max(len(t), max_count)
     print(max_count)
     # s = 'FGHGHH'
     # print(s.split('A'))
@@ -185,27 +192,32 @@ def task_24():
     # print(cur_all)
 
 
-
-task_24()
+# task_24()
 # a = ['Z', 'AB']
 # print(len(max(a, key=len)))
 
+size = 93
+win = 107
+a = [[0]*size*2 for i in range(size*2)]
 
+for s1 in range(size):
+    for s2 in range(size):
+        if 2*s1 + s2 >= win or s1 + 2*s2 >= win:
+            a[s1][s2] = 1
 
+for k in range(2*size):
+    for s1 in range(size):
+        for s2 in range(size):
+            if a[s1][s2] == 0:
+                if a[s1 * 2][s2] > 0 and a[s1][s2 * 2] > 0 and a[s1 + 1][s2] > 0 and a[s1][s2 + 1] > 0:
+                    a[s1][s2] = -max(a[s1 * 2][s2], a[s1][s2 * 2], a[s1 + 1][s2], a[s1][s2 + 1])
+                elif a[s1 * 2][s2] < 0 or a[s1][s2 * 2] < 0 or a[s1 + 1][s2] < 0 or a[s1][s2 + 1] < 0:
+                    neg = list(filter(lambda x: x < 0, [a[s1 * 2][s2], a[s1][s2 * 2], a[s1 + 1][s2], a[s1][s2 + 1]]))
+                    a[s1][s2] = abs(min(neg)) + 1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+for s in range(1, 94):
+    if a[13][s] == 2:
+        print(s)
 
 
 
